@@ -1,10 +1,14 @@
 [
     {
-        "version": "10.3.1",
+        "version": "10.4.0",
         "changes": [
             {
                 "note": "Add gitpkg.",
                 "pr": 2649
+            },
+            {
+                "note": "Add `refundReceiver` field to `FillQuoteTransformer.TransformData`.",
+                "pr": 2657
             }
         ]
     },

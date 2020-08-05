@@ -18,6 +18,7 @@ import * as _ from 'lodash';
 import { constants } from '../constants';
 import {
     CalldataInfo,
+    ExchangeProxyContractOpts,
     MarketBuySwapQuote,
     MarketOperation,
     MarketSellSwapQuote,
@@ -78,14 +79,15 @@ export class ExchangeProxySwapQuoteConsumer implements SwapQuoteConsumerBase {
         opts: Partial<SwapQuoteGetOutputOpts> = {},
     ): Promise<CalldataInfo> {
         assert.isValidSwapQuote('quote', quote);
-        const { isFromETH, isToETH } = {
+        const { refundReceiver, isFromETH, isToETH } = {
             ...constants.DEFAULT_FORWARDER_SWAP_QUOTE_GET_OPTS,
             extensionContractOpts: {
                 isFromETH: false,
                 isToETH: false,
+                refundReceiver: NULL_ADDRESS,
             },
             ...opts,
-        }.extensionContractOpts;
+        }.extensionContractOpts as ExchangeProxyContractOpts;
 
         const sellToken = getTokenFromAssetData(quote.takerAssetData);
         const buyToken = getTokenFromAssetData(quote.makerAssetData);
@@ -110,6 +112,7 @@ export class ExchangeProxySwapQuoteConsumer implements SwapQuoteConsumerBase {
             data: encodeFillQuoteTransformerData({
                 sellToken,
                 buyToken,
+                refundReceiver: refundReceiver || NULL_ADDRESS,
                 side: isBuyQuote(quote) ? FillQuoteTransformerSide.Buy : FillQuoteTransformerSide.Sell,
                 fillAmount: isBuyQuote(quote) ? quote.makerAssetFillAmount : quote.takerAssetFillAmount,
                 maxOrderFillAmounts: [],

@@ -42,6 +42,7 @@ export { SwapQuoter } from './swap_quoter';
 export {
     CalldataInfo,
     ExchangeProxyContractOpts,
+    ExchangeProxyRefundReceiver,
     ExtensionContractType,
     ForwarderExtensionContractOpts,
     GetExtensionContractTypeOpts,

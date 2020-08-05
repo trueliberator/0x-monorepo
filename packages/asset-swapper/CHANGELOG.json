@@ -29,6 +29,10 @@
             {
                 "note": "Fix regression where a split on the same source was collapsed into a single fill",
                 "pr": 2654
+            },
+            {
+                "note": "Add `refundReceiver` to `ExchangeProxySwapQuoteConsumer` options.",
+                "pr": 2657
             }
         ]
     },
